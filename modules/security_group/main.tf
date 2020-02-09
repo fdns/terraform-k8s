@@ -1,3 +1,7 @@
+locals {
+  allowed_ports = ["80", "443", "6443"]
+}
+
 resource "aws_security_group" "cloud" {
   name_prefix = "cloud_security"
   description = "Used in the terraform"
@@ -17,6 +21,17 @@ resource "aws_security_group" "cloud" {
     to_port     = 51820
     protocol    = "udp"
     cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  dynamic "ingress" {
+    for_each = local.allowed_ports
+
+    content {
+      from_port   = ingress.value
+      to_port     = ingress.value
+      protocol    = "tcp"
+      cidr_blocks = ["0.0.0.0/0"]
+    }
   }
 
   egress {
