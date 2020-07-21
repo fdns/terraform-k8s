@@ -1,7 +1,7 @@
 # Project Setup
 project           = "cloud"
 region            = "us-east-2"
-availability_zone = "us-east-2a"
+availability_zone = "us-east-2b"
 
 # VPC
 vpc_cidr   = "10.211.0.0/16"
@@ -14,4 +14,5 @@ ssh_keys = [
 ]
 
 # instances
-default_ami = "ami-02ccb28830b645a41"
+# amzn2-ami-hvm-2.0.20200617.0-x86_64-gp2
+default_ami = "ami-016b213e65284e9c9"
