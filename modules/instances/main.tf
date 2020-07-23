@@ -1,6 +1,6 @@
 resource "aws_spot_fleet_request" "cheap_compute" {
   iam_fleet_role                      = "arn:aws:iam::345025288683:role/aws-ec2-spot-fleet-tagging-role"
-  spot_price                          = 0.0199
+  spot_price                          = 0.0114
   allocation_strategy                 = "lowestPrice"
   target_capacity                     = 1
   valid_until                         = timeadd(timestamp(), "2h")
@@ -9,7 +9,7 @@ resource "aws_spot_fleet_request" "cheap_compute" {
   launch_specification {
     availability_zone           = var.availability_zone
     ami                         = var.default_ami
-    instance_type               = "c5a.large"
+    instance_type               = "t3a.medium"
     subnet_id                   = var.subnet_cloud
     associate_public_ip_address = true
     vpc_security_group_ids      = ["${var.security_group}"]
@@ -18,21 +18,22 @@ resource "aws_spot_fleet_request" "cheap_compute" {
 
     root_block_device {
       volume_type           = "standard"
-      volume_size           = 32
+      volume_size           = 16
       delete_on_termination = true
     }
 
     tags = {
       project      = var.project
       protected    = "false"
-      ansible-role  = "master"
+      ansible-role = "master"
     }
   }
 }
 
 resource "aws_spot_fleet_request" "cheap_compute2" {
+  count                               = 2
   iam_fleet_role                      = "arn:aws:iam::345025288683:role/aws-ec2-spot-fleet-tagging-role"
-  spot_price                          = 0.0199
+  spot_price                          = 0.0114
   allocation_strategy                 = "lowestPrice"
   target_capacity                     = 1
   valid_until                         = timeadd(timestamp(), "4h")
@@ -41,7 +42,7 @@ resource "aws_spot_fleet_request" "cheap_compute2" {
   launch_specification {
     availability_zone           = var.availability_zone
     ami                         = var.default_ami
-    instance_type               = "c5a.large"
+    instance_type               = "t3a.medium"
     subnet_id                   = var.subnet_cloud
     associate_public_ip_address = true
     vpc_security_group_ids      = ["${var.security_group}"]
@@ -57,7 +58,8 @@ resource "aws_spot_fleet_request" "cheap_compute2" {
     tags = {
       project      = var.project
       protected    = "false"
-      ansible-role  = "worker"
+      ansible-role = "worker"
     }
   }
 }
+
