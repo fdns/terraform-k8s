@@ -23,3 +23,7 @@ variable cloud_cidr {}
 
 # instances
 variable default_ami {}
+variable spot_time {
+  description = "Time the spot instances are run"
+  type        = string
+}

@@ -20,3 +20,8 @@ variable default_ami {
   description = "AMI of the database instance"
   type        = string
 }
+
+variable spot_time {
+  description = "Time the spot instances are run"
+  type        = string
+}

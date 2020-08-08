@@ -36,4 +36,5 @@ module instances {
   subnet_cloud = module.vpc.aws_subnet_cloud
 
   default_ami = var.default_ami
+  spot_time   = var.spot_time
 }

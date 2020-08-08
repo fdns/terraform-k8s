@@ -3,13 +3,13 @@ resource "aws_spot_fleet_request" "cheap_compute" {
   spot_price                          = 0.0114
   allocation_strategy                 = "lowestPrice"
   target_capacity                     = 1
-  valid_until                         = timeadd(timestamp(), "2h")
+  valid_until                         = timeadd(timestamp(), var.spot_time)
   terminate_instances_with_expiration = true
 
   launch_specification {
     availability_zone           = var.availability_zone
     ami                         = var.default_ami
-    instance_type               = "t3a.medium"
+    instance_type               = "t3a.small"
     subnet_id                   = var.subnet_cloud
     associate_public_ip_address = true
     vpc_security_group_ids      = ["${var.security_group}"]
@@ -36,7 +36,7 @@ resource "aws_spot_fleet_request" "cheap_compute2" {
   spot_price                          = 0.0114
   allocation_strategy                 = "lowestPrice"
   target_capacity                     = 1
-  valid_until                         = timeadd(timestamp(), "4h")
+  valid_until                         = timeadd(timestamp(), var.spot_time)
   terminate_instances_with_expiration = true
 
   launch_specification {
