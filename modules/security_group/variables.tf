@@ -1,6 +1,6 @@
-variable project {}
+variable "project" {}
 
-variable vpc {
+variable "vpc" {
   description = "VPC id associated with the security group"
   type        = string
 }
