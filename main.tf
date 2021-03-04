@@ -44,4 +44,11 @@ module "instances" {
 
   default_ami = var.default_ami
   spot_time   = var.spot_time
+
+  master_type   = var.master_type
+  worker_type   = var.worker_type
+  worker_number = var.worker_number
+
+  master_bid = var.master_bid
+  worker_bid = var.worker_bid
 }

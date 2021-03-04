@@ -27,3 +27,28 @@ variable "spot_time" {
   description = "Time the spot instances are run"
   type        = string
 }
+
+variable "master_type" {
+  description = "Instance type of the master node"
+  type        = string
+}
+
+variable "worker_type" {
+  description = "Instance type of the slave node"
+  type        = string
+}
+
+variable "master_bid" {
+  description = "Maximun bid for the spot instance"
+  type        = number
+}
+
+variable "worker_bid" {
+  description = "Maximun bid for the spot instance"
+  type        = number
+}
+
+variable "worker_number" {
+  description = "Number of worker nodes to allocate"
+  type        = number
+}

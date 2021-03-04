@@ -1,6 +1,6 @@
-resource "aws_spot_fleet_request" "cheap_compute" {
+resource "aws_spot_fleet_request" "master_nodes" {
   iam_fleet_role                      = "arn:aws:iam::345025288683:role/aws-ec2-spot-fleet-tagging-role"
-  spot_price                          = 0.0114
+  spot_price                          = var.master_bid
   allocation_strategy                 = "lowestPrice"
   target_capacity                     = 1
   valid_until                         = timeadd(timestamp(), var.spot_time)
@@ -9,7 +9,7 @@ resource "aws_spot_fleet_request" "cheap_compute" {
   launch_specification {
     availability_zone           = var.availability_zone
     ami                         = var.default_ami
-    instance_type               = "t3a.small"
+    instance_type               = var.master_type
     subnet_id                   = var.subnet_cloud
     associate_public_ip_address = true
     vpc_security_group_ids      = ["var.security_group"]
@@ -30,10 +30,10 @@ resource "aws_spot_fleet_request" "cheap_compute" {
   }
 }
 
-resource "aws_spot_fleet_request" "cheap_compute2" {
-  count                               = 2
+resource "aws_spot_fleet_request" "worker_nodes" {
+  count                               = var.worker_number
   iam_fleet_role                      = "arn:aws:iam::345025288683:role/aws-ec2-spot-fleet-tagging-role"
-  spot_price                          = 0.0114
+  spot_price                          = var.worker_bid
   allocation_strategy                 = "lowestPrice"
   target_capacity                     = 1
   valid_until                         = timeadd(timestamp(), var.spot_time)
@@ -42,7 +42,7 @@ resource "aws_spot_fleet_request" "cheap_compute2" {
   launch_specification {
     availability_zone           = var.availability_zone
     ami                         = var.default_ami
-    instance_type               = "t3a.medium"
+    instance_type               = var.worker_type
     subnet_id                   = var.subnet_cloud
     associate_public_ip_address = true
     vpc_security_group_ids      = ["var.security_group"]
