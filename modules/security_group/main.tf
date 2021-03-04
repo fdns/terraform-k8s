@@ -5,7 +5,7 @@ locals {
 resource "aws_security_group" "cloud" {
   name_prefix = "cloud_security"
   description = "Used in the terraform"
-  vpc_id      = "${var.vpc}"
+  vpc_id      = "var.vpc"
 
   ingress {
     description = "SSH access from anywhere"

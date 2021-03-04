@@ -11,7 +11,7 @@ resource "aws_vpc" "default" {
 
 resource "aws_subnet" "cloud" {
   availability_zone       = var.availability_zone
-  vpc_id                  = "${aws_vpc.default.id}"
+  vpc_id                  = "aws_vpc.default.id"
   cidr_block              = var.cloud_cidr
   map_public_ip_on_launch = true
 
@@ -42,8 +42,8 @@ resource "aws_route_table" "rt_public" {
 }
 
 resource "aws_route_table_association" "rt_public_association" {
-  subnet_id      = "${aws_subnet.cloud.id}"
-  route_table_id = "${aws_route_table.rt_public.id}"
+  subnet_id      = "aws_subnet.cloud.id"
+  route_table_id = "aws_route_table.rt_public.id"
 }
 
 /*

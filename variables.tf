@@ -1,29 +1,29 @@
 # General
-variable project {
+variable "project" {
   description = "Project name, used for tagging the resources"
   type        = string
 }
 
-variable region {
+variable "region" {
   description = "Region of the main deployment"
   type        = string
 }
 
-variable availability_zone {
+variable "availability_zone" {
   description = "Main availability zone of the resource"
   type        = string
 }
 
 # SSH
-variable ssh_keys {}
+variable "ssh_keys" {}
 
 # VPC
-variable vpc_cidr {}
-variable cloud_cidr {}
+variable "vpc_cidr" {}
+variable "cloud_cidr" {}
 
 # instances
-variable default_ami {}
-variable spot_time {
+variable "default_ami" {}
+variable "spot_time" {
   description = "Time the spot instances are run"
   type        = string
 }

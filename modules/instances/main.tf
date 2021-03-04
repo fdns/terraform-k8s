@@ -12,8 +12,8 @@ resource "aws_spot_fleet_request" "cheap_compute" {
     instance_type               = "t3a.small"
     subnet_id                   = var.subnet_cloud
     associate_public_ip_address = true
-    vpc_security_group_ids      = ["${var.security_group}"]
-    user_data                   = "${templatefile("modules/instances/init.sh", { ssh_keys = var.ssh_keys })}"
+    vpc_security_group_ids      = ["var.security_group"]
+    user_data                   = templatefile("modules/instances/init.sh", { ssh_keys = var.ssh_keys })
     iam_instance_profile        = "terraform_instance_cloud"
 
     root_block_device {
@@ -45,8 +45,8 @@ resource "aws_spot_fleet_request" "cheap_compute2" {
     instance_type               = "t3a.medium"
     subnet_id                   = var.subnet_cloud
     associate_public_ip_address = true
-    vpc_security_group_ids      = ["${var.security_group}"]
-    user_data                   = "${templatefile("modules/instances/init.sh", { ssh_keys = var.ssh_keys })}"
+    vpc_security_group_ids      = ["var.security_group"]
+    user_data                   = templatefile("modules/instances/init.sh", { ssh_keys = var.ssh_keys })
     iam_instance_profile        = "terraform_instance_cloud"
 
     root_block_device {

@@ -1,4 +1,11 @@
 terraform {
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 3.0"
+    }
+  }
+
   backend "s3" {
     bucket = "fdns-terraform-state"
     key    = "cloud-instance"
@@ -25,7 +32,7 @@ module "vpc" {
   availability_zone = var.availability_zone
 }
 
-module instances {
+module "instances" {
   source = "./modules/instances"
 
   project           = var.project
