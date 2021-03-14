@@ -15,8 +15,8 @@ ssh_keys = [
 ]
 
 # instances
-# amzn2-ami-hvm-2.0.20200617.0-x86_64-gp2
-default_ami = "ami-016b213e65284e9c9"
+# amzn2-ami-hvm-2.0.20210303.0-x86_64-ebs
+default_ami = "ami-0cbe06d357b3ab301"
 spot_time   = "4h"
 
 master_type   = "t3a.small"
