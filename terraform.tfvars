@@ -21,7 +21,7 @@ spot_time   = "4h"
 
 master_type   = "t3a.small"
 worker_type   = "t3a.medium"
-worker_number = 2
+worker_number = 1
 
 master_bid = 0.0114
 worker_bid = 0.0114

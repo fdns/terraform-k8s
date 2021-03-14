@@ -12,7 +12,7 @@ resource "aws_spot_fleet_request" "master_nodes" {
     instance_type               = var.master_type
     subnet_id                   = var.subnet_cloud
     associate_public_ip_address = true
-    vpc_security_group_ids      = ["var.security_group"]
+    vpc_security_group_ids      = [var.security_group]
     user_data                   = templatefile("modules/instances/init.sh", { ssh_keys = var.ssh_keys })
     iam_instance_profile        = "terraform_instance_cloud"
 
@@ -27,6 +27,10 @@ resource "aws_spot_fleet_request" "master_nodes" {
       protected    = "false"
       ansible-role = "master"
     }
+  }
+
+  tags = {
+    project = var.project
   }
 }
 
@@ -45,7 +49,7 @@ resource "aws_spot_fleet_request" "worker_nodes" {
     instance_type               = var.worker_type
     subnet_id                   = var.subnet_cloud
     associate_public_ip_address = true
-    vpc_security_group_ids      = ["var.security_group"]
+    vpc_security_group_ids      = [var.security_group]
     user_data                   = templatefile("modules/instances/init.sh", { ssh_keys = var.ssh_keys })
     iam_instance_profile        = "terraform_instance_cloud"
 
@@ -61,5 +65,8 @@ resource "aws_spot_fleet_request" "worker_nodes" {
       ansible-role = "worker"
     }
   }
-}
 
+  tags = {
+    project = var.project
+  }
+}

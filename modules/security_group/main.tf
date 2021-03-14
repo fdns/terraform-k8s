@@ -1,19 +1,11 @@
 locals {
-  allowed_ports = ["80", "443", "6443"]
+  allowed_ports = ["22", "80", "443", "6443"]
 }
 
 resource "aws_security_group" "cloud" {
-  name_prefix = "cloud_security"
+  name_prefix = "${var.project}_securitygroup"
   description = "Used in the terraform"
-  vpc_id      = "var.vpc"
-
-  ingress {
-    description = "SSH access from anywhere"
-    from_port   = 22
-    to_port     = 22
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
+  vpc_id      = var.vpc
 
   ingress {
     description = "wireguard access from anywhere"
